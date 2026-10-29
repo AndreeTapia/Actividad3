@@ -19,6 +19,9 @@ path = Turtle(visible=False)
 writer = Turtle(visible=False)
 aim = vector(5, 0)
 pacman = vector(-60, -120)
+
+game_speed = 100  # Velocidad inicial del juego en milisegundos (menor = más rápido)
+
 ghosts = [
     [vector(-180, 160), vector(5, 0)],
     [vector(-180, -160), vector(0, 5)],
@@ -123,6 +126,8 @@ def world():
 
 def move():
     """Move pacman and all ghosts."""
+    global game_speed
+    
     writer.undo()
     writer.write(state['score'])
 
@@ -173,7 +178,7 @@ def move():
         if abs(pacman - point) < 20:
             return
 
-    ontimer(move, 100)
+    ontimer(move, game_speed)
 
 
 def change(x, y):
@@ -181,6 +186,20 @@ def change(x, y):
     if valid(pacman + vector(x, y)):
         aim.x = x
         aim.y = y
+
+
+def cambiar_rapido():
+    global game_speed
+    if game_speed > 25:
+        game_speed -= 15
+    print("Velocidad de juego (ms):", game_speed)
+
+
+def cambiar_lento():
+    global game_speed
+    if game_speed < 200:
+        game_speed += 15
+    print("Velocidad de juego (ms):", game_speed)
 
 
 setup(420, 420, 370, 0)
@@ -194,6 +213,8 @@ onkey(lambda: change(5, 0), 'Right')
 onkey(lambda: change(-5, 0), 'Left')
 onkey(lambda: change(0, 5), 'Up')
 onkey(lambda: change(0, -5), 'Down')
+onkey(cambiar_rapido, 'r')
+onkey(cambiar_lento, 't')
 world()
 move()
 done()
