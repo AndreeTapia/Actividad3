@@ -1,4 +1,6 @@
 # Actividad 3
+El tercer repositorio contiene el archivo pasman.py que es un videojuego simulador de Pacman.
+
 Andree Tapia:<rb>
 - Se modificó el mapa original agregando y/o quitando obstaculos.<rb>
 - Se modificó el número de fantasmas.<rb>
